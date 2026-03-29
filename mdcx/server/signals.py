@@ -10,11 +10,11 @@ from .ws.manager import websocket_manager
 from .ws.types import MessageType, WebSocketMessage
 
 
-class Signal[*T = *tuple[()]]:
-    def __init__(self, fn: Callable[[*T], None] | None = None):
+class Signal:
+    def __init__(self, fn: Callable[..., None] | None = None):
         self.fn = fn
 
-    def emit(self, *args: *T):
+    def emit(self, *args: Any):
         if self.fn:
             self.fn(*args)
 
@@ -36,8 +36,8 @@ class ServerSignals:
         self.exec_set_main_info = Signal(self._emit_set_main_info)
         self.change_buttons_status = Signal()
         self.reset_buttons_status = Signal()
-        self.set_label_file_path = Signal[str]()
-        self.label_result = Signal[str]()
+        self.set_label_file_path = Signal()
+        self.label_result = Signal()
         self.logs_failed_settext = Signal(self._emit_logs_failed_settext)
         self.view_success_file_settext = Signal(self._emit_view_success_file_settext)
         self.exec_set_processbar = Signal(self._emit_set_processbar)

@@ -886,3 +886,74 @@ async def move_sub(
                 LogBuffer.log().write("\n 🔴 Sub move failed!")
                 return
         LogBuffer.log().write("\n 🍀 Sub done!")
+
+
+async def cli_run_scraper() -> None:
+    """
+    CLI function to run the scraper.
+    Must run inside executor._loop (same loop as async_client).
+    """
+    try:
+        print(f"\n✅ Using default config: {manager.path}\n")
+
+        # Get movie path from config
+        movie_path = Path(manager.config.media_path or manager.data_folder)
+        if not movie_path.exists():
+            print(f"❌ Movie path does not exist: {movie_path}")
+            return
+
+        # Get movie list
+        movie_list = await get_movie_list(FileMode.Default, movie_path, [])
+
+        print(f"📁 Movie path: {movie_path}")
+        print(f"📺 Found {len(movie_list)} movies to scrape\n")
+
+        if not movie_list:
+            print("⚠️  No movies found to scrape")
+            return
+
+        print("🍯 Starting scraper...\n")
+        crawler_provider = CrawlerProvider(manager.config, manager.computed.async_client)
+        scraper = Scraper(crawler_provider)
+        await scraper.run(FileMode.Default, movie_list)
+
+        # Suppress the "again" retry that would spawn a second background scrape
+        Flags.again_dic.clear()
+
+        # Print error details
+        if Flags.failed_list:
+            print("\n\n🔴 FAILED FILES:")
+            print("=" * 80)
+            for failed_path, error_reason in Flags.failed_list:
+                print(f"❌ {failed_path}")
+                if error_reason:
+                    print(f"   Reason: {error_reason}")
+            print("=" * 80)
+
+        print("\n✅ Scraping completed!")
+
+    except Exception as e:
+        print(f"\n❌ Error during scraping: {str(e)}")
+        print(traceback.format_exc())
+
+
+def cli_main() -> None:
+    """
+    Main CLI entry point.
+    Runs inside executor._loop so the async_client (bound to that loop) works correctly.
+    """
+    try:
+        print("\n" + "=" * 80)
+        print("MDCx CLI - Movie Metadata Scraper")
+        print("=" * 80)
+
+        # Use executor.run() so we share the same event loop as async_client
+        executor.run(cli_run_scraper())
+
+        print("\n" + "=" * 80)
+        print("✅ All done! Check the output folders for results.")
+        print("=" * 80 + "\n")
+
+    except Exception as e:
+        print(f"\n\n❌ Fatal error: {str(e)}")
+        traceback.print_exc()

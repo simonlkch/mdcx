@@ -174,7 +174,8 @@ async def _clean_empty_fodlers(path: Path, file_mode: FileMode) -> None:
 
     def task():
         folders: list[Path] = []
-        for root, dirs, files in path.walk(top_down=True):
+        for root, dirs, files in os.walk(str(path), topdown=True):
+            root = Path(root)
             if (root / "skip").exists():  # 是否有skip文件
                 dirs[:] = []  # 忽略当前文件夹子目录
                 continue
@@ -215,7 +216,8 @@ async def check_and_clean_files() -> None:
     succ = 0
     fail = 0
     # 只有主界面点击会运行此函数, 因此此 walk 无需后台执行
-    for root, dirs, files in Path(movie_path).walk(top_down=True):
+    for root, dirs, files in os.walk(str(movie_path), topdown=True):
+        root = Path(root)
         for f in files:
             # 判断清理文件
             path = root / f
@@ -263,7 +265,8 @@ async def movie_lists(ignore_dirs: list[Path], media_type: list[str], movie_path
         i = 100
         skip = 0
         skip_repeat_softlink = 0
-        for root, dirs, files in movie_path.walk(top_down=True):
+        for root, dirs, files in os.walk(str(movie_path), topdown=True):
+            root = Path(root)
             for d in dirs.copy():
                 if root / d in ignore_dirs or "behind the scenes" in d:
                     dirs.remove(d)
@@ -427,7 +430,8 @@ async def newtdisk_creat_symlink(
             fail_num = 0
             skip_num = 0
             done = set()
-            for root, _, files in netdisk_path.walk(top_down=True):
+            for root, _, files in os.walk(str(netdisk_path), topdown=True):
+                root = Path(root)
                 if root == local_path:
                     continue
 

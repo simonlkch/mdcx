@@ -1,6 +1,11 @@
 import re
 from enum import StrEnum
-from typing import override
+
+try:
+    from typing import override
+except ImportError:
+    def override(func):
+        return func
 
 from parsel import Selector
 from pydantic import BaseModel

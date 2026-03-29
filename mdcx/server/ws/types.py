@@ -4,16 +4,16 @@ from collections.abc import Awaitable, Callable, Mapping
 from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from enum import Enum
-from typing import Any
+from typing import Any, Generic, TypeAlias, TypeVar
 
-type JsonSerializable = Mapping[str, JsonSerializable] | list[JsonSerializable] | str | int | float | bool | None
-type Handler[T: JsonSerializable] = (
-    Callable[[str, WebSocketMessage[T]], None] | Callable[[str, WebSocketMessage[T]], Awaitable[None]]
-)
-type Middleware[T: JsonSerializable] = (
-    Callable[[WebSocketMessage[T]], WebSocketMessage[T] | None]
-    | Callable[[WebSocketMessage[T]], Awaitable[WebSocketMessage[T] | None]]
-)
+JsonSerializable: TypeAlias = Mapping[str, Any] | list[Any] | str | int | float | bool | None
+TJson = TypeVar("TJson", bound=JsonSerializable)
+Handler: TypeAlias = Callable[[str, "WebSocketMessage[Any]"], None] | Callable[
+    [str, "WebSocketMessage[Any]"], Awaitable[None]
+]
+Middleware: TypeAlias = Callable[["WebSocketMessage[Any]"], "WebSocketMessage[Any]" | None] | Callable[
+    ["WebSocketMessage[Any]"], Awaitable["WebSocketMessage[Any]" | None]
+]
 
 
 class MessageType(Enum):
@@ -41,11 +41,11 @@ class ConnectionStatus(Enum):
 
 
 @dataclass
-class WebSocketMessage[T: JsonSerializable]:
+class WebSocketMessage(Generic[TJson]):
     """WebSocket 消息数据类"""
 
     type: MessageType
-    data: T | None = None
+    data: TJson | None = None
     timestamp: datetime = field(default_factory=datetime.now)
     message_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     client_id: str | None = None

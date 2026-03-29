@@ -1869,7 +1869,7 @@ class MyMAinWindow(QMainWindow):
 
     # 设置-网络-网址设置-下拉框切换
     def switch_custom_website_change(self, site):
-        if site not in Website:
+        if site not in {w.value for w in Website}:
             return
         site = Website(site)
         self.Ui.lineEdit_site_custom_url.setText(manager.config.get_site_url(site))

@@ -197,8 +197,9 @@ async def check_missing_number(actor_flag):
 
     # 遍历本地资源库
     signal.show_log_text("")
+    library_text = "\n   ".join(str(p) for p in libraries)
     signal.show_log_text(
-        f"\n本地资源库地址:\n   {'\n   '.join(str(p) for p in libraries)}\n\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n⏳ 开始遍历本地资源库，以获取本地视频的最新列表...\n   提示：每次启动第一次查询将更新本地视频数据。（大概1000个/30秒，如果视频较多，请耐心等待。）"
+        f"\n本地资源库地址:\n   {library_text}\n\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n⏳ 开始遍历本地资源库，以获取本地视频的最新列表...\n   提示：每次启动第一次查询将更新本地视频数据。（大概1000个/30秒，如果视频较多，请耐心等待。）"
     )
     all_movies: list[Path] = []
     for p in libraries:

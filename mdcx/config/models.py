@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 from datetime import timedelta
 from functools import lru_cache
 from typing import TYPE_CHECKING, Any, Literal, cast
-
+from typing import Generic, TypeVar
 from pydantic import BaseModel, ConfigDict, Field, HttpUrl, field_validator
 from pydantic.fields import FieldInfo
 
@@ -729,7 +729,7 @@ class Config(BaseModel):
     def parse_sites(sites: list | set | str) -> list[Website]:
         if isinstance(sites, str):
             sites = str_to_list(sites, ",")
-        return [Website(s) for s in sites if s in Website]
+        return [Website(s) for s in sites if s in {w.value for w in Website}]
 
     @staticmethod
     def update(d: dict[str, Any]) -> list[str]:
@@ -845,7 +845,7 @@ class Config(BaseModel):
         site_configs: dict[Website, SiteConfig] = {}
         for key, value in data.items():
             # custom url
-            if key.endswith("_website") and key[:-8] in Website:
+            if key.endswith("_website") and key[:-8] in {w.value for w in Website}:
                 site_name = key.replace("_website", "")
                 site_configs[Website(site_name)] = SiteConfig(custom_url=value)
         data["site_configs"] = site_configs
@@ -901,8 +901,11 @@ class CompatRule:
     notes: list = field(kw_only=True, default_factory=list)
 
 
+TRaw = TypeVar('TRaw')
+TNew = TypeVar('TNew')
+
 @dataclass
-class Rename[TRaw = str, TNew = TRaw](CompatRule):
+class Rename(CompatRule, Generic[TRaw, TNew]):
     old_name: str
     new_name: str
     to_new: Callable[[TRaw], TNew] | None = None

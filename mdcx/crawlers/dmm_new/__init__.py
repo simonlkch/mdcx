@@ -1,7 +1,12 @@
 import re
 from collections import defaultdict
 from collections.abc import Sequence
-from typing import override
+
+try:
+    from typing import override
+except ImportError:
+    def override(func):
+        return func
 
 from parsel import Selector
 from patchright._impl._api_structures import SetCookieParam

@@ -1,9 +1,11 @@
 import re
-from typing import TypedDict, Unpack
+from typing import Generic, TypedDict, TypeVar, Unpack
 
 from parsel import Selector
 
 from .types import NOT_SUPPORT, Context, CrawlerData, CSSSelector, FieldRes, FieldValue, SelectorType
+
+TContext = TypeVar("TContext", bound=Context)
 
 
 def extract_text(html: Selector, *selector: SelectorType) -> str:
@@ -89,7 +91,7 @@ def re_findall(pattern: str, text: str, flags: int = 0) -> list[tuple[str, ...]]
     return r
 
 
-class DetailPageParser[T: Context = Context]:
+class DetailPageParser(Generic[TContext]):
     """
     详情页解析器的基类. 子类应重写所需字段的对应方法.
 
@@ -104,83 +106,83 @@ class DetailPageParser[T: Context = Context]:
     NOT_SUPPORT = NOT_SUPPORT
     """表示某字段在该网站上不存在. 它和空值的区别在于, 该值不被视为获取失败."""
 
-    async def title(self, ctx: T, html: Selector) -> FieldRes:
+    async def title(self, ctx: TContext, html: Selector) -> FieldRes:
         return self.NOT_SUPPORT
 
-    async def actors(self, ctx: T, html: Selector) -> FieldRes[list[str]]:
+    async def actors(self, ctx: TContext, html: Selector) -> FieldRes[list[str]]:
         return self.NOT_SUPPORT
 
-    async def all_actors(self, ctx: T, html: Selector) -> FieldRes[list[str]]:
+    async def all_actors(self, ctx: TContext, html: Selector) -> FieldRes[list[str]]:
         return self.NOT_SUPPORT
 
-    async def directors(self, ctx: T, html: Selector) -> FieldRes[list[str]]:
+    async def directors(self, ctx: TContext, html: Selector) -> FieldRes[list[str]]:
         return self.NOT_SUPPORT
 
-    async def extrafanart(self, ctx: T, html: Selector) -> FieldRes[list[str]]:
+    async def extrafanart(self, ctx: TContext, html: Selector) -> FieldRes[list[str]]:
         return self.NOT_SUPPORT
 
-    async def originalplot(self, ctx: T, html: Selector) -> FieldRes:
+    async def originalplot(self, ctx: TContext, html: Selector) -> FieldRes:
         return self.NOT_SUPPORT
 
-    async def originaltitle(self, ctx: T, html: Selector) -> FieldRes:
+    async def originaltitle(self, ctx: TContext, html: Selector) -> FieldRes:
         return self.NOT_SUPPORT
 
-    async def outline(self, ctx: T, html: Selector) -> FieldRes:
+    async def outline(self, ctx: TContext, html: Selector) -> FieldRes:
         return self.NOT_SUPPORT
 
-    async def poster(self, ctx: T, html: Selector) -> FieldRes:
+    async def poster(self, ctx: TContext, html: Selector) -> FieldRes:
         return self.NOT_SUPPORT
 
-    async def publisher(self, ctx: T, html: Selector) -> FieldRes:
+    async def publisher(self, ctx: TContext, html: Selector) -> FieldRes:
         return self.NOT_SUPPORT
 
-    async def release(self, ctx: T, html: Selector) -> FieldRes:
+    async def release(self, ctx: TContext, html: Selector) -> FieldRes:
         return self.NOT_SUPPORT
 
-    async def runtime(self, ctx: T, html: Selector) -> FieldRes:
+    async def runtime(self, ctx: TContext, html: Selector) -> FieldRes:
         return self.NOT_SUPPORT
 
-    async def score(self, ctx: T, html: Selector) -> FieldRes:
+    async def score(self, ctx: TContext, html: Selector) -> FieldRes:
         return self.NOT_SUPPORT
 
-    async def series(self, ctx: T, html: Selector) -> FieldRes:
+    async def series(self, ctx: TContext, html: Selector) -> FieldRes:
         return self.NOT_SUPPORT
 
-    async def studio(self, ctx: T, html: Selector) -> FieldRes:
+    async def studio(self, ctx: TContext, html: Selector) -> FieldRes:
         return self.NOT_SUPPORT
 
-    async def tags(self, ctx: T, html: Selector) -> FieldRes[list[str]]:
+    async def tags(self, ctx: TContext, html: Selector) -> FieldRes[list[str]]:
         return self.NOT_SUPPORT
 
-    async def thumb(self, ctx: T, html: Selector) -> FieldRes:
+    async def thumb(self, ctx: TContext, html: Selector) -> FieldRes:
         return self.NOT_SUPPORT
 
-    async def trailer(self, ctx: T, html: Selector) -> FieldRes:
+    async def trailer(self, ctx: TContext, html: Selector) -> FieldRes:
         return self.NOT_SUPPORT
 
-    async def wanted(self, ctx: T, html: Selector) -> FieldRes:
+    async def wanted(self, ctx: TContext, html: Selector) -> FieldRes:
         return self.NOT_SUPPORT
 
-    async def year(self, ctx: T, html: Selector) -> FieldRes:
+    async def year(self, ctx: TContext, html: Selector) -> FieldRes:
         return self.NOT_SUPPORT
 
-    async def image_cut(self, ctx: T, html: Selector) -> FieldRes:
+    async def image_cut(self, ctx: TContext, html: Selector) -> FieldRes:
         return self.NOT_SUPPORT
 
-    async def image_download(self, ctx: T, html: Selector) -> FieldValue[bool]:
+    async def image_download(self, ctx: TContext, html: Selector) -> FieldValue[bool]:
         return self.NOT_SUPPORT
 
-    async def number(self, ctx: T, html: Selector) -> FieldRes:
+    async def number(self, ctx: TContext, html: Selector) -> FieldRes:
         return self.NOT_SUPPORT
 
-    async def mosaic(self, ctx: T, html: Selector) -> FieldRes:
+    async def mosaic(self, ctx: TContext, html: Selector) -> FieldRes:
         return self.NOT_SUPPORT
 
     class OtherFields(TypedDict, total=False):
         external_id: str
         source: str
 
-    async def parse(self, ctx: T, html: Selector, **kwargs: Unpack[OtherFields]) -> CrawlerData:
+    async def parse(self, ctx: TContext, html: Selector, **kwargs: Unpack[OtherFields]) -> CrawlerData:
         """
         调用所有字段的解析方法, 并构造 CrawlerResult.
 

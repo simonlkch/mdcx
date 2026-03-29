@@ -629,7 +629,7 @@ def save_config(self: "MyMAinWindow"):
     manager.config.retry = self.Ui.horizontalSlider_retry.value()  # 重试次数
 
     site = self.Ui.comboBox_custom_website.currentText()
-    if site in Website:
+    if site in {w.value for w in Website}:
         site = Website(site)
         url = self.Ui.lineEdit_site_custom_url.text().strip("/ ")
         use_browser = self.Ui.checkBox_site_use_browser.isChecked()
