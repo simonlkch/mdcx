@@ -69,11 +69,13 @@ def load_config(self: "MyMAinWindow"):
     errors = manager.load()
     v1_msgs = [e for e in errors if e.startswith("[V1]")]
     if v1_msgs:
-        signal_qt.show_log_text(f"\n\t{'\n\t'.join(v1_msgs)}\n\n")
+        v1_text = "\n\t".join(v1_msgs)
+        signal_qt.show_log_text(f"\n\t{v1_text}\n\n")
         errors = [e for e in errors if not e.startswith("[V1]")]
     if errors:
+        error_text = "\n\t".join(errors)
         signal_qt.show_log_text(
-            f"⚠️ 读取配置文件出错:\n\t{'\n\t'.join(errors)}\n\n"
+            f"⚠️ 读取配置文件出错:\n\t{error_text}\n\n"
             "为避免破坏配置文件, 已自动切换为 _failed.json\n"
             '这是非预期错误, 请提交 <a href="https://github.com/sqzw-x/mdcx/issues/new?template=bug_report_cn.yaml">GitHub Issue</a>\n'
         )
@@ -946,7 +948,7 @@ def load_config(self: "MyMAinWindow"):
 
         # site config
         site = self.Ui.comboBox_custom_website.currentText()
-        if site in Website:
+        if site in {w.value for w in Website}:
             self.Ui.lineEdit_site_custom_url.setText(manager.config.get_site_url(Website(site)))
             site_config = manager.config.get_site_config(Website(site))
             self.Ui.checkBox_site_use_browser.setChecked(site_config.use_browser)

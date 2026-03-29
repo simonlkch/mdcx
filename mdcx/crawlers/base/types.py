@@ -1,6 +1,7 @@
 import re
 from dataclasses import dataclass, field
 from re import Pattern
+from typing import TypeAlias, TypeVar
 
 from mdcx.models.types import CrawlerDebugInfo, CrawlerInput, CrawlerResult
 from mdcx.utils.dataclass import update_valid
@@ -17,10 +18,12 @@ class NotSupport: ...
 
 NOT_SUPPORT = NotSupport()
 
-type FieldValue[T = str] = T | None | NotSupport
-type FieldRes[T = str] = FieldValue[T]
+T = TypeVar("T")
 
-type SelectorType = XPath | CSSSelector | Pattern | str
+FieldValue: TypeAlias = T | None | NotSupport
+FieldRes: TypeAlias = FieldValue
+
+SelectorType: TypeAlias = XPath | CSSSelector | Pattern | str
 
 
 def c(selector: str) -> CSSSelector:
@@ -35,7 +38,7 @@ def r(pattern: str) -> Pattern:
     return re.compile(pattern)
 
 
-def is_valid[T](v: FieldValue[T]) -> bool:
+def is_valid(v: FieldValue[T]) -> bool:
     return bool(v) and not isinstance(v, NotSupport)
 
 

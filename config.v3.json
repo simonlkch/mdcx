@@ -1,0 +1,680 @@
+{
+  "media_path": "D:/FFOutput/新增資料夾",
+  "softlink_path": "softlink",
+  "success_output_folder": "JAV_output_pic",
+  "failed_output_folder": "failed",
+  "extrafanart_folder": "extrafanart_copy",
+  "media_type": [
+    ".mp4",
+    ".avi",
+    ".rmvb",
+    ".wmv",
+    ".mov",
+    ".mkv",
+    ".flv",
+    ".ts",
+    ".webm",
+    ".iso",
+    ".mpg"
+  ],
+  "sub_type": [
+    ".smi",
+    ".srt",
+    ".idx",
+    ".sub",
+    ".sup",
+    ".psb",
+    ".ssa",
+    ".ass",
+    ".usf",
+    ".xss",
+    ".ssf",
+    ".rt",
+    ".lrc",
+    ".sbv",
+    ".vtt",
+    ".ttml"
+  ],
+  "scrape_softlink_path": false,
+  "auto_link": false,
+  "folders": [
+    "JAV_output_pic",
+    "examples",
+    "exclude",
+    "failed"
+  ],
+  "string": [
+    "h_720",
+    "2048论坛@fun2048.com",
+    "1080p",
+    "720p",
+    "22-sht.me",
+    "-HD",
+    "bbs2048.org@",
+    "hhd800.com@",
+    "icao.me@",
+    "hhb_000",
+    "[456k.me]",
+    "[ThZu.Cc]"
+  ],
+  "file_size": 100.0,
+  "no_escape": [
+    "record_success_file"
+  ],
+  "clean_ext": [
+    ".html",
+    ".url"
+  ],
+  "clean_name": [
+    "uur76.mp4",
+    "uur9 3.com.mp4"
+  ],
+  "clean_contains": [
+    "直 播 盒 子",
+    "最 新 情 報",
+    "最 新 位 址",
+    "注册免费送",
+    "房间火爆",
+    "美女荷官",
+    "妹妹直播",
+    "精彩直播"
+  ],
+  "clean_size": 0.0,
+  "clean_ignore_ext": [],
+  "clean_ignore_contains": [
+    "skip",
+    "ignore"
+  ],
+  "clean_enable": [
+    "clean_ext",
+    "clean_name",
+    "clean_contains",
+    "clean_size",
+    "clean_ignore_ext",
+    "clean_ignore_contains"
+  ],
+  "thread_number": 4,
+  "thread_time": 2,
+  "javdb_time": 5,
+  "main_mode": 1,
+  "read_mode": [],
+  "update_mode": "c",
+  "update_a_folder": "actor",
+  "update_b_folder": "number actor",
+  "update_c_filetemplate": "number",
+  "update_d_folder": "number actor",
+  "update_titletemplate": "number title",
+  "soft_link": 0,
+  "success_file_move": true,
+  "failed_file_move": true,
+  "success_file_rename": true,
+  "del_empty_folder": true,
+  "show_poster": true,
+  "download_files": [
+    "poster",
+    "thumb",
+    "fanart",
+    "nfo",
+    "ignore_wuma",
+    "ignore_fc2",
+    "ignore_guochan"
+  ],
+  "keep_files": [
+    "extrafanart",
+    "trailer",
+    "theme_videos"
+  ],
+  "download_hd_pics": [
+    "poster",
+    "thumb",
+    "amazon",
+    "official",
+    "google"
+  ],
+  "google_used": [
+    "m.media-amazon.com"
+  ],
+  "google_exclude": [
+    "fake",
+    "javfree",
+    "idoljp.com",
+    "qqimg.top",
+    "u9a9",
+    "picturedata",
+    "abpic",
+    "pbs.twimg.com",
+    "naiwarp"
+  ],
+  "scrape_like": "info",
+  "website_single": "airav_cc",
+  "website_youma": [
+    "freejavbt",
+    "javlibrary",
+    "iqqtv",
+    "airav",
+    "avsex",
+    "javbus",
+    "javdb",
+    "official",
+    "avsox",
+    "xcity",
+    "dmm",
+    "lulubar",
+    "jav321",
+    "airav_cc"
+  ],
+  "website_wuma": [
+    "freejavbt",
+    "iqqtv",
+    "airav",
+    "javbus",
+    "javdb",
+    "avsox",
+    "jav321"
+  ],
+  "website_suren": [
+    "freejavbt",
+    "avsex",
+    "javbus",
+    "javdb",
+    "mgstage",
+    "jav321"
+  ],
+  "website_fc2": [
+    "freejavbt",
+    "7mmtv",
+    "airav",
+    "fc2hub",
+    "javdb",
+    "fc2",
+    "avsox",
+    "fc2club"
+  ],
+  "website_oumei": [
+    "javbus",
+    "javdb",
+    "theporndb"
+  ],
+  "website_guochan": [
+    "javday",
+    "cnmdb",
+    "madouqu",
+    "mdtv"
+  ],
+  "title_sehua": true,
+  "title_yesjav": false,
+  "title_sehua_zh": true,
+  "actor_realname": true,
+  "outline_format": [],
+  "field_configs": {
+    "actors": {
+      "site_prority": [
+        "official",
+        "theporndb",
+        "javbus",
+        "javlibrary",
+        "javdb",
+        "airav_cc",
+        "iqqtv",
+        "freejavbt",
+        "jav321",
+        "dmm",
+        "7mmtv",
+        "avsex",
+        "lulubar",
+        "airav",
+        "xcity",
+        "avsox",
+        "mgstage",
+        "fc2",
+        "fc2club",
+        "fc2hub"
+      ],
+      "language": "jp",
+      "translate": true
+    },
+    "directors": {
+      "site_prority": [
+        "official",
+        "javbus",
+        "freejavbt"
+      ],
+      "language": "jp",
+      "translate": true
+    },
+    "extrafanart": {
+      "site_prority": [
+        "official",
+        "javbus",
+        "freejavbt"
+      ],
+      "language": "undefined",
+      "translate": false
+    },
+    "outline": {
+      "site_prority": [
+        "official",
+        "theporndb",
+        "dmm",
+        "jav321",
+        "airav_cc",
+        "avsex",
+        "iqqtv",
+        "lulubar",
+        "7mmtv",
+        "airav",
+        "xcity",
+        "mgstage",
+        "fc2",
+        "fc2hub"
+      ],
+      "language": "zh_cn",
+      "translate": true
+    },
+    "poster": {
+      "site_prority": [
+        "official",
+        "theporndb",
+        "avsex",
+        "javbus"
+      ],
+      "language": "undefined",
+      "translate": false
+    },
+    "publisher": {
+      "site_prority": [
+        "official",
+        "javbus"
+      ],
+      "language": "jp",
+      "translate": true
+    },
+    "release": {
+      "site_prority": [
+        "official",
+        "javbus",
+        "freejavbt",
+        "7mmtv",
+        "airav_cc",
+        "iqqtv",
+        "jav321",
+        "dmm",
+        "javlibrary",
+        "javdb",
+        "avsex",
+        "lulubar",
+        "airav",
+        "xcity",
+        "avsox",
+        "mgstage",
+        "fc2",
+        "theporndb"
+      ],
+      "language": "undefined",
+      "translate": false
+    },
+    "runtime": {
+      "site_prority": [
+        "official",
+        "javbus",
+        "freejavbt"
+      ],
+      "language": "undefined",
+      "translate": false
+    },
+    "score": {
+      "site_prority": [
+        "official",
+        "jav321",
+        "javlibrary",
+        "javdb"
+      ],
+      "language": "undefined",
+      "translate": false
+    },
+    "series": {
+      "site_prority": [
+        "official",
+        "javbus",
+        "freejavbt"
+      ],
+      "language": "jp",
+      "translate": true
+    },
+    "studio": {
+      "site_prority": [
+        "official",
+        "javbus",
+        "freejavbt"
+      ],
+      "language": "jp",
+      "translate": true
+    },
+    "tags": {
+      "site_prority": [
+        "official",
+        "javbus",
+        "freejavbt",
+        "airav_cc",
+        "iqqtv",
+        "jav321",
+        "dmm",
+        "javlibrary",
+        "7mmtv",
+        "javdb",
+        "avsex",
+        "lulubar",
+        "airav",
+        "xcity",
+        "avsox",
+        "mgstage",
+        "fc2",
+        "fc2club",
+        "fc2hub",
+        "theporndb"
+      ],
+      "language": "jp",
+      "translate": true
+    },
+    "thumb": {
+      "site_prority": [
+        "official",
+        "theporndb",
+        "javbus",
+        "airav_cc",
+        "iqqtv",
+        "freejavbt",
+        "jav321",
+        "dmm",
+        "javlibrary",
+        "7mmtv",
+        "avsex",
+        "lulubar",
+        "airav",
+        "xcity",
+        "avsox",
+        "mgstage",
+        "fc2",
+        "fc2club",
+        "fc2hub"
+      ],
+      "language": "undefined",
+      "translate": false
+    },
+    "title": {
+      "site_prority": [
+        "official",
+        "theporndb",
+        "mgstage",
+        "dmm",
+        "javbus",
+        "jav321",
+        "javlibrary",
+        "airav_cc",
+        "iqqtv",
+        "avsex",
+        "lulubar"
+      ],
+      "language": "zh_cn",
+      "translate": true
+    },
+    "trailer": {
+      "site_prority": [
+        "official",
+        "freejavbt",
+        "mgstage",
+        "dmm"
+      ],
+      "language": "undefined",
+      "translate": false
+    },
+    "wanted": {
+      "site_prority": [],
+      "language": "undefined",
+      "translate": false
+    },
+    "all_actors": {
+      "site_prority": [
+        "official",
+        "theporndb",
+        "javbus",
+        "javlibrary",
+        "javdb",
+        "airav_cc",
+        "iqqtv",
+        "freejavbt",
+        "jav321",
+        "dmm",
+        "7mmtv",
+        "avsex",
+        "lulubar",
+        "airav",
+        "xcity",
+        "avsox",
+        "mgstage",
+        "fc2",
+        "fc2club",
+        "fc2hub"
+      ],
+      "language": "jp",
+      "translate": true
+    },
+    "originalplot": {
+      "site_prority": [
+        "official",
+        "theporndb",
+        "dmm",
+        "jav321",
+        "airav_cc",
+        "avsex",
+        "iqqtv",
+        "lulubar",
+        "7mmtv",
+        "airav",
+        "xcity",
+        "mgstage",
+        "fc2",
+        "fc2hub"
+      ],
+      "language": "zh_cn",
+      "translate": true
+    },
+    "originaltitle": {
+      "site_prority": [
+        "official",
+        "theporndb",
+        "mgstage",
+        "dmm",
+        "javbus",
+        "jav321",
+        "javlibrary",
+        "airav_cc",
+        "iqqtv",
+        "avsex",
+        "lulubar"
+      ],
+      "language": "zh_cn",
+      "translate": true
+    }
+  },
+  "site_configs": {
+    "dmm": {
+      "use_browser": true,
+      "custom_url": null
+    },
+    "airav": {
+      "use_browser": false,
+      "custom_url": null
+    }
+  },
+  "translate_config": {
+    "translate_by": [
+      "youdao",
+      "google",
+      "deepl"
+    ],
+    "deepl_key": "",
+    "llm_url": "https://free.v36.cm/v1",
+    "llm_model": "gpt-3.5-turbo",
+    "llm_key": "sk-H1c4G0RPrsuqNbBJ9a9000439fCd4d41B860791cDe1c9fF9\n",
+    "llm_prompt": "Please translate the following text to {lang}. Output only the translation without any explanation.\n{content}",
+    "llm_read_timeout": 60,
+    "llm_max_req_sec": 1.0,
+    "llm_max_try": 5,
+    "llm_temperature": 0.3
+  },
+  "nfo_include_new": [
+    "sorttitle",
+    "originaltitle",
+    "title_cd",
+    "outline",
+    "plot_",
+    "originalplot",
+    "release_",
+    "releasedate",
+    "premiered",
+    "country",
+    "mpaa",
+    "customrating",
+    "year",
+    "runtime",
+    "wanted",
+    "score",
+    "criticrating",
+    "actor",
+    "director",
+    "series",
+    "tag",
+    "genre",
+    "series_set",
+    "studio",
+    "maker",
+    "publisher",
+    "label",
+    "poster",
+    "cover",
+    "trailer",
+    "website"
+  ],
+  "nfo_tagline": "发行日期 release",
+  "nfo_tag_include": [
+    "actor",
+    "letters",
+    "series",
+    "studio",
+    "publisher",
+    "cnword",
+    "mosaic",
+    "definition"
+  ],
+  "nfo_tag_series": "series",
+  "nfo_tag_studio": "studio",
+  "nfo_tag_publisher": "publisher",
+  "nfo_tag_actor": "actor",
+  "nfo_tag_actor_contains": [],
+  "folder_name": "number",
+  "naming_file": "number",
+  "naming_media": "number title",
+  "prevent_char": "",
+  "fields_rule": [
+    "del_actor",
+    "del_char"
+  ],
+  "suffix_sort": [
+    "moword",
+    "cnword",
+    "definition"
+  ],
+  "actor_no_name": "未知演员",
+  "release_rule": "YYYY-MM-DD",
+  "folder_name_max": 60,
+  "file_name_max": 60,
+  "actor_name_max": 3,
+  "actor_name_more": "等演员",
+  "umr_style": "-破解",
+  "leak_style": "-流出",
+  "wuma_style": "",
+  "youma_style": "",
+  "cd_name": 0,
+  "cd_char": [
+    "digital",
+    "underline"
+  ],
+  "pic_simple_name": false,
+  "trailer_simple_name": true,
+  "hd_name": "height",
+  "hd_get": "video",
+  "cnword_char": [
+    "-C.",
+    "-C-",
+    "ch.",
+    "字幕"
+  ],
+  "cnword_style": "-C",
+  "folder_cnword": true,
+  "file_cnword": true,
+  "subtitle_folder": "",
+  "subtitle_add": false,
+  "subtitle_add_chs": true,
+  "subtitle_add_rescrape": true,
+  "server_type": "emby",
+  "emby_url": "http://192.168.5.191:8096/",
+  "api_key": "ee9a2f2419704257b1dd60b975f2d64e",
+  "user_id": "",
+  "emby_on": [
+    "actor_info_zh_cn",
+    "actor_info_miss",
+    "actor_photo_net",
+    "actor_photo_miss"
+  ],
+  "use_database": false,
+  "info_database_path": "",
+  "gfriends_github": "https://github.com/gfriends/gfriends",
+  "actor_photo_folder": "",
+  "actor_photo_kodi_auto": false,
+  "poster_mark": 1,
+  "thumb_mark": 1,
+  "fanart_mark": 0,
+  "mark_size": 5,
+  "mark_type": [
+    "sub",
+    "umr",
+    "leak",
+    "uncensored",
+    "hd"
+  ],
+  "mark_fixed": "not_fixed",
+  "mark_pos": "top_left",
+  "mark_pos_corner": "top_left",
+  "mark_pos_sub": "top_left",
+  "mark_pos_mosaic": "top_right",
+  "mark_pos_hd": "bottom_right",
+  "use_proxy": false,
+  "proxy": "http://192.252.209.155:14455",
+  "timeout": 5,
+  "retry": 2,
+  "theporndb_api_token": "",
+  "javdb": "",
+  "javbus": "",
+  "show_web_log": false,
+  "show_from_log": true,
+  "show_data_log": true,
+  "save_log": true,
+  "update_check": true,
+  "local_library": [],
+  "actors_name": "",
+  "netdisk_path": "",
+  "localdisk_path": "",
+  "window_title": "hide",
+  "switch_on": [
+    "rest_scrape",
+    "remain_task",
+    "show_dialog_stop_scrape",
+    "show_logs",
+    "hide_none",
+    "dark_mode"
+  ],
+  "timed_interval": "PT30M",
+  "rest_count": 10,
+  "rest_time": "PT1M2S"
+}

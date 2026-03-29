@@ -3,7 +3,7 @@ import traceback
 from abc import ABC, abstractmethod
 from asyncio import Lock
 from collections.abc import Sequence
-from typing import TYPE_CHECKING, Any, Literal, Never
+from typing import TYPE_CHECKING, Any, Generic, Literal, Never, TypeVar
 
 from parsel import Selector
 from patchright._impl._api_structures import SetCookieParam
@@ -18,7 +18,10 @@ if TYPE_CHECKING:
     from mdcx.web_async import AsyncWebClient
 
 
-class GenericBaseCrawler[T: Context = Context](ABC):
+TContext = TypeVar("TContext", bound=Context)
+
+
+class GenericBaseCrawler(Generic[TContext], ABC):
     """
     爬虫基类. 所有具体爬虫均应继承此类并实现其抽象方法.
 
@@ -64,7 +67,7 @@ class GenericBaseCrawler[T: Context = Context](ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def new_context(self, input: CrawlerInput) -> T:
+    def new_context(self, input: CrawlerInput) -> TContext:
         raise NotImplementedError
 
     async def run(self, input: CrawlerInput) -> CrawlerResponse:
@@ -87,7 +90,7 @@ class GenericBaseCrawler[T: Context = Context](ABC):
         finally:
             ctx.debug_info.execution_time = time.time() - start_time
 
-    async def _run(self, ctx: T):
+    async def _run(self, ctx: TContext):
         if not ctx.input.appoint_url:
             search_urls = await self._generate_search_url(ctx)
             if not search_urls:
@@ -112,7 +115,7 @@ class GenericBaseCrawler[T: Context = Context](ABC):
         data = data.to_result()
         return await self.post_process(ctx, data)
 
-    async def _search(self, ctx: T, search_urls: list[str]) -> list[str] | None:
+    async def _search(self, ctx: TContext, search_urls: list[str]) -> list[str] | None:
         for search_url in search_urls:
             html, error = await self._fetch_search(ctx, search_url)
             if html is None:
@@ -125,7 +128,7 @@ class GenericBaseCrawler[T: Context = Context](ABC):
                 ctx.debug(f"详情页 URL: {detail_urls}")
                 return detail_urls if isinstance(detail_urls, list) else [detail_urls]
 
-    async def _detail(self, ctx: T, detail_urls: list[str]) -> CrawlerData | None:
+    async def _detail(self, ctx: TContext, detail_urls: list[str]) -> CrawlerData | None:
         for detail_url in detail_urls:
             html, error = await self._fetch_detail(ctx, detail_url)
             if html is None:
@@ -139,14 +142,14 @@ class GenericBaseCrawler[T: Context = Context](ABC):
             return scraped_data
 
     @abstractmethod
-    async def _generate_search_url(self, ctx: T) -> list[str] | str | None:
+    async def _generate_search_url(self, ctx: TContext) -> list[str] | str | None:
         """
         生成搜索 URL. 如果重写 `_run` 则无须实现此方法.
         """
         raise NotImplementedError
 
     @abstractmethod
-    async def _parse_search_page(self, ctx: T, html: Selector, search_url: str) -> list[str] | str | None:
+    async def _parse_search_page(self, ctx: TContext, html: Selector, search_url: str) -> list[str] | str | None:
         """
         解析搜索结果页, 获取详情页 URL. 如果重写 `_search` 则无须实现此方法.
 
@@ -162,7 +165,7 @@ class GenericBaseCrawler[T: Context = Context](ABC):
         raise NotImplementedError
 
     @abstractmethod
-    async def _parse_detail_page(self, ctx: T, html: Selector, detail_url: str) -> CrawlerData | None:
+    async def _parse_detail_page(self, ctx: TContext, html: Selector, detail_url: str) -> CrawlerData | None:
         """
         解析详情页获取数据. 如果重写 `_detail` 则无须实现此方法.
 
@@ -175,7 +178,7 @@ class GenericBaseCrawler[T: Context = Context](ABC):
         """
         raise NotImplementedError
 
-    async def post_process(self, ctx: T, res: CrawlerResult) -> CrawlerResult:
+    async def post_process(self, ctx: TContext, res: CrawlerResult) -> CrawlerResult:
         """
         爬取并解析完成后对结果进行后处理.
 
@@ -184,19 +187,19 @@ class GenericBaseCrawler[T: Context = Context](ABC):
         """
         return res
 
-    async def _fetch_search(self, ctx: T, url: str, use_browser: bool | None = False) -> tuple[str | None, str]:
+    async def _fetch_search(self, ctx: TContext, url: str, use_browser: bool | None = False) -> tuple[str | None, str]:
         """
         获取搜索页. 此方法不应抛出异常.
         """
         return await self._fetch(ctx, url, use_browser)
 
-    async def _fetch_detail(self, ctx: T, url: str, use_browser: bool | None = False) -> tuple[str | None, str]:
+    async def _fetch_detail(self, ctx: TContext, url: str, use_browser: bool | None = False) -> tuple[str | None, str]:
         """
         获取详情页. 此方法不应抛出异常.
         """
         return await self._fetch(ctx, url, use_browser)
 
-    async def _fetch(self, ctx: T, url: str, use_browser: bool | None) -> tuple[str | None, str]:
+    async def _fetch(self, ctx: TContext, url: str, use_browser: bool | None) -> tuple[str | None, str]:
         if use_browser is not False:
             content, error = await self._browser_fetch(ctx, url)
             if content is not None:
@@ -207,7 +210,7 @@ class GenericBaseCrawler[T: Context = Context](ABC):
 
     async def _browser_fetch(
         self,
-        ctx: T,
+        ctx: TContext,
         url: str,
         wait_until: Literal["commit", "domcontentloaded", "load", "networkidle"] | None = "load",
     ) -> tuple[str | None, str]:
@@ -222,7 +225,7 @@ class GenericBaseCrawler[T: Context = Context](ABC):
         except Exception as e:
             return None, f"浏览器请求失败: {e}"
 
-    async def _init_browser_context(self, ctx: T, cookies: Sequence[SetCookieParam] | None = None) -> bool:
+    async def _init_browser_context(self, ctx: TContext, cookies: Sequence[SetCookieParam] | None = None) -> bool:
         if self.browser is None:
             return False
         if self._browser_context is not None:
@@ -240,13 +243,13 @@ class GenericBaseCrawler[T: Context = Context](ABC):
                 return False
         return True
 
-    def _get_cookies(self, ctx: T) -> dict[str, str] | None:
+    def _get_cookies(self, ctx: TContext) -> dict[str, str] | None:
         return None
 
-    def _get_cookies_browser(self, ctx: T) -> Sequence[SetCookieParam] | None:
+    def _get_cookies_browser(self, ctx: TContext) -> Sequence[SetCookieParam] | None:
         return None
 
-    def _get_headers(self, ctx: T) -> dict[str, str] | None:
+    def _get_headers(self, ctx: TContext) -> dict[str, str] | None:
         return None
 
 

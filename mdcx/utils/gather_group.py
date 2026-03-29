@@ -1,9 +1,12 @@
 import asyncio
 from collections.abc import Awaitable, Coroutine
-from typing import Any
+from typing import Any, Generic, TypeVar
 
 
-class GatherGroup[T = Any]:
+T = TypeVar("T")
+
+
+class GatherGroup(Generic[T]):
     """
     类似 asyncio.TaskGroup 的 API, 但底层使用 asyncio.gather 实现, 因此可在部分任务抛出异常时继续运行.
 
@@ -11,8 +14,8 @@ class GatherGroup[T = Any]:
     """
 
     def __init__(self):
-        self._tasks: list[Coroutine] = []
-        self._results: list[Any]
+        self._tasks: list[Coroutine[Any, Any, T]] = []
+        self._results: list[T | Exception] = []
         self._entered = False
 
     def add(self, coro: Coroutine[Any, Any, T]) -> Awaitable[T]:

@@ -2,4 +2,18 @@
     "xml.format.maxLineWidth": 0,
     "python.analysis.languageServerMode": "full",
     "python.analysis.typeCheckingMode": "standard",
+    "chat.tools.terminal.autoApprove": {
+        "/^venv\\\\Scripts\\\\python main\\.py$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^powershell -Command \"Get-ChildItem -Path 'D:\\\\FFOutput\\\\新增資料夾\\\\failed' \\| % \\{ Move-Item -Path \\$_\\.FullName -Destination 'D:\\\\FFOutput\\\\新增資料夾\\\\' -Force \\}\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^\\.\\\\venv\\\\Scripts\\\\python\\.exe cli\\.py 2>&1$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    },
 }

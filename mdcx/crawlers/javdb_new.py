@@ -1,5 +1,10 @@
 import re
-from typing import override
+
+try:
+    from typing import override
+except ImportError:
+    def override(func):
+        return func
 from urllib.parse import urljoin
 
 from parsel import Selector
