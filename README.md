@@ -17,6 +17,34 @@
 
 > 一般情况请勿自行构建, 至 [Release](https://github.com/sqzw-x/mdcx/releases) 下载最新版
 
+### 本地构建 (Windows)
+
+在仓库根目录执行:
+
+```powershell
+# 1) 激活虚拟环境
+venv\Scripts\Activate.ps1
+
+# 2) 安装构建依赖 (首次构建建议执行)
+python -m pip install -U pyinstaller rich
+
+# 3) 执行官方构建脚本
+python scripts/build.py --no-color
+```
+
+构建成功后可执行文件位于:
+
+```text
+dist/MDCx.exe
+```
+
+若遇到 `build/MDCx/MDCx.pkg` 文件被占用, 可使用以下命令绕过旧构建缓存:
+
+```powershell
+pyi-makespec --name MDCx --noupx --onefile -w main.py -p ./mdcx --add-data resources:resources --add-data libs:. --icon resources/Img/MDCx.icns --hidden-import _cffi_backend --collect-all curl_cffi --collect-all patchright
+pyinstaller MDCx.spec -y --workpath build_new --distpath dist
+```
+
 ### Windows 7
 
 > 即将放弃对 Windows 7 的支持. [#494](https://github.com/sqzw-x/mdcx/issues/494)
